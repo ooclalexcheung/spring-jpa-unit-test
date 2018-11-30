@@ -1,9 +1,8 @@
 package com.oocl.web.sampleWebApp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.*;
 
 @Entity
 public class SingleEntity {
@@ -26,6 +25,7 @@ public class SingleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long id;
+    @Column(length = 10)
     public String name;
 
 }

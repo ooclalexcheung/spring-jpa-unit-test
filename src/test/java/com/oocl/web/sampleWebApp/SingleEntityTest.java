@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static com.oocl.web.sampleWebApp.AssertHelper.assertThrows;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
@@ -27,5 +28,22 @@ public class SingleEntityTest {
 
         //Then
         assertEquals("HelloWorld",fetched.name);
+    }
+
+    @Test
+    public void should_fetch_exception(){
+        //Given
+        SingleEntity singleEntity = new SingleEntity();
+        singleEntity.id = 1L;
+        singleEntity.name="HelloWorld!";
+
+
+        //When
+        assertThrows(Exception.class, ()-> {
+            singleEntityRepository.save(singleEntity);
+            singleEntityRepository.flush();
+        });
+
+        //Then
     }
 }
